@@ -4,7 +4,6 @@ A simple sample for JAX_RS EJB JPA HSQLDB/MYSQL Restful
 
 # GamBank Account Sample
 
-
 ### This application features:
 
 _1-add a new account to accounts_
@@ -25,41 +24,78 @@ All action is done in rest way I explained in detail that:
 
 `curl -X GET -H "Content-Type:application/json" -i localhost:8080/gambank/api/account `
 
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/01getAllAcount.jpg)
+
+**1-1-Get an account (GET http://localhost:8080/gambank/api/account/{id})**
+
+`curl -X GET -H "Content-Type:application/json" -i localhost:8080/gambank/api/account/3 `
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/02getAccount.jpg)
+
 **2-Add a new account(POST http://localhost:8080/gambank/api/account)**
 
 `curl X POST -H "Content-Type:application/json" -d '{"accountOwner": "Mostafa","accountType": "DEPOSIT","balance": 789000}' -i localhost:8080/gambank/api/account `
-
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/03addAcount.jpg)
 **3-Update an account(PUT http://localhost:8080/gambank/api/account/{id})**
 
 `curl -X PUT -H 'Content-Type:application/json' -d '{"accountOwner": "Jmashid","accountType": "SAVING","balance": 10000}' -i localhost:8080/gambank/api/account/7 `
-
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/04editAccount.jpg)
 **4-Search an account(GET http://localhost:8080/gambank/api/account/query?owner={Owner}&number={Number} &type={Type})**
 
 `curl -X GET -H 'Content-Type:application/json' -i localhost:8080/gambank/api/account/query?owner=m&number=3&type=DEPOSIT`
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/07getByQuery.jpg)
 
 **4-1-Search acounts by owner name(GET http://localhost:8080/gambank/api/account/byowner?owner={Owner}**
 
 `curl -X GET -H 'Content-Type:application/json' -i localhost:8080/gambank/api/account/byowner?owner=Mostafa`
-
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/08getByOwner.jpg)
 **4-2-Search acounts by type name(GET http://localhost:8080/gambank/api/account/bytype?type={Type}**
 
 `curl -X GET -H 'Content-Type:application/json' -i localhost:8080/gambank/api/account/bytype?type=SAVING`
-
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/10getByType.jpg)
 **4-3-Search acounts by account number(GET http://localhost:8080/gambank/api/account/bynumber?number={Number}**
 
 `curl -X GET -H 'Content-Type:application/json' -i localhost:8080/gambank/api/account/bynumber?number=4 `
-
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/09getByNumber.jpg)
 **5-Delete account (DELETE localhost:8080/gambank/api/account/{id})**
 
-`curl -X DELETE -H -i localhost:8080/gambank/api/account/17`
+`curl -X DELETE -H -i localhost:8080/gambank/api/account/7`
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/05deleteAcount.jpg)
+
+after delete 
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/06deleteResult.jpg)
 
 **5-1-Delete multiple account (GET localhost:8080/gambank/api/account/delete?{id}&{id}&{id}...)**
 
+
 `curl -X GET -H -i localhost:8080/gambank/api/account/delete?id=1&id=2&id=3&id=4`
+
+before bulk delete:
+
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/14beforBulkDelete.jpg)
+
+bulk delete:
+
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/15bulkDelete.jpg)
+
+after bulk delete:
+
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/16afterBulkDelete.jpg)
 
 **6-Transfer Money (GET localhost:8080/gambank/api/account/transfer?from={id}&to={id}&amount={amount})**
 
 `curl -X GET -H 'Content-Type:application/json' -i localhost:8080/gambank/api/account/transfer?from=4&to=5&amount=1000 `
+
+before transfer money:
+
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/11beforTransfer.jpg)
+
+transferring :
+
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/12transfer.jpg)
+
+after transfer money:
+
+![](https://832701ebcfebacf4e434d5e275088f4195a609ad.googledrive.com/host/0ByvX9dE_kmzlRXhiSS1GY0QzLTg/13afterTransfer.jpg)
 If their type is different get message "Accounts Type dose not match for account: 4 and 5" 
 
 ## Sql for table
