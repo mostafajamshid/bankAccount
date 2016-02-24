@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GamBank Account Sample</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body style="margin: 20px;">
+        <h1 style="color: blueviolet">GamBank Account Sample</h1>
+        <br>
+        <h2 style="color: crimson">This application features:</h2>
+        <div style="margin-left: 10px; color: dodgerblue">
+            <h3>1-add a new account to accounts</h5>
+            <h3>2-search account by account owner, account number or account type </h3>
+            <h3>3-delete one (or multiple accounts simultaneously) from the system </h3>
+            <h3>4-update account information in the system (except account number) </h3>
+            <h3>5-transfer money from one account to another  one if  the same type </h3>
+
+            <p>All action is done in rest way I explained in detail that:</p>
+
+            <h3 style="color: darkblue;"> 1-Get all account list (GET  http://localhost:8080/gambank/api/account)</h3>
+            curl -X GET -H "Content-Type:application/json"  -i   localhost:8080/gambank/api/account
+            <br>
+            <h3 style="color: darkblue;">2-Add a new account(POST  http://localhost:8080/gambank/api/account)</h3>
+            curl X POST -H "Content-Type:application/json" -d '{"accountOwner": "Mostafa","accountType": "DEPOSIT","balance": 789000}' -i   localhost:8080/gambank/api/account
+            <br>
+            <h3 style="color: darkblue;">3-Update an account(PUT  http://localhost:8080/gambank/api/account/{id})</h3>
+            curl -X PUT -H 'Content-Type:application/json' -d '{"accountOwner": "Jmashid","accountType": "SAVING","balance": 10000}' -i localhost:8080/gambank/api/account/7
+            <br>
+            <h3 style="color: darkblue;">4-Search an account(GET  http://localhost:8080/gambank/api/account/query?owner={Owner}&number={Number} &type={Type})</h3>
+            curl -X GET -H 'Content-Type:application/json'  -i localhost:8080/gambank/api/account/query?owner=m&number=3&type=DEPOSIT
+            <h3 style="color: darkslategray;">4-1-Search acounts by owner name(GET  http://localhost:8080/gambank/api/account/byowner?owner={Owner}</h3>
+            curl -X GET -H 'Content-Type:application/json'  -i localhost:8080/gambank/api/account/byowner?owner=Mostafa
+            <h3 style="color: darkslategray;">4-2-Search acounts by type name(GET  http://localhost:8080/gambank/api/account/bytype?type={Type}</h3>
+            curl -X GET -H 'Content-Type:application/json'  -i localhost:8080/gambank/api/account/bytype?type=SAVING
+            <h3 style="color: darkslategray;">4-3-Search acounts by account number(GET  http://localhost:8080/gambank/api/account/bynumber?number={Number}</h3>
+            curl -X GET -H 'Content-Type:application/json'  -i localhost:8080/gambank/api/account/bynumber?number=4
+            <br>
+            <h3 style="color: darkblue;">5-Delete account (DELETE  localhost:8080/gambank/api/account/{id})</h3>
+            curl -X DELETE -H -i localhost:8080/gambank/api/account/17
+            <h3 style="color: darkblue;">5-1-Delete multiple account (GET  localhost:8080/gambank/api/account/delete?{id}&{id}&{id}...)</h3>
+            curl -X GET -H -i localhost:8080/gambank/api/account/delete?id=1&id=2&id=3&id=4
+            <h3 style="color: darkblue;">6-Transfer Money (GET localhost:8080/gambank/api/account/transfer?from={id}&to={id}&amount={amount})</h3>
+            curl -X GET -H 'Content-Type:application/json'  -i localhost:8080/gambank/api/account/transfer?from=4&to=5&amount=1000
+            <br>
+            If their type is different get message<span style="color: red;"> "Accounts Type dose not match for account: 4 and 5"</span>
+            <br>
+            <br>
+            <h2>Sql for table </h2>
+            <code style="color: green;">
+                CREATE TABLE IF NOT EXISTS `account` (
+                <br/>
+                `account_number` int(11) NOT NULL AUTO_INCREMENT,
+                <br/>
+                `account_owner` varchar(50) COLLATE utf8_persian_ci NOT NULL,
+                <br/>
+                `account_type` varchar(50) COLLATE utf8_persian_ci NOT NULL,
+                <br/>
+                `balance` double NOT NULL,
+                <br/>
+                PRIMARY KEY (`account_number`)
+                <br/>
+                ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+            </code>
+        </div>
+    </body>
+</html>
