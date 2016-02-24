@@ -1,6 +1,6 @@
 
 
-A simple sample for JAX_RS EJB JPA HSQLDB/MYSQL Restful 
+A simple example for combining JPA and JAX-RS to create RESTful service with (JAX_RS EJB JPA HSQLDB/MYSQL) without ui
 
 # GamBank Account Sample
 
